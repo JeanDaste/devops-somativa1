@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- Define a linguagem do documento no elemento <html> (não em <meta>) -->
+<html lang="en">
+<head>
+  <!-- Codificação do documento -->
+  <meta charset="utf-8">
+  <!-- Ajuste responsivo em telas menores -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS externo do formulário -->
+  <link rel="stylesheet" href="styles.css">
+  <title>Survey Form</title>
+</head>
+
+<body>
+  <!-- Título principal da página -->
+  <h1 id="title">First Survey Form</h1>
+
+  <!-- Descrição curta do propósito do formulário -->
+  <p id="description">
+    Fill out this form carefully and calmly, there is no need to rush
+  </p>
+
+  <!--
+    O formulário em si.
+    - id usado por testes/estilos
+    - action pode ser setado depois (ex.: action="/api/surveys")
+    - method padrão é GET; para enviar dados, normalmente se usa POST
+  -->
+  <form id="survey-form" method="post" action="#">
+
+    <!-- Campo: Nome -->
+    <div>
+      <!--
+        Atributo for do <label> aponta para o id do input,
+        melhorando acessibilidade e foco ao clicar no rótulo.
+      -->
+      <label for="name" id="name-label">Name:</label>
+      <input
+        id="name"
+        name="name"           <!-- name é o “campo” que será enviado -->
+        type="text"
+        required              <!-- torna o preenchimento obrigatório -->
+        placeholder="Enter your name"
+      >
+    </div>
+
+    <!-- Campo: E-mail -->
+    <div>
+      <label for="email" id="email-label">Email:</label>
+      <input
+        id="email"
+        name="email"
+        type="email"          <!-- validação nativa de email -->
+        required
+        placeholder="Enter your email"
+      >
+    </div>
+
+    <!-- Campo: Idade (número) -->
+    <div>
+      <label for="number" id="number-label">Age:</label>
+      <input
+        id="number"
+        name="age"
+        type="number"
+        required
+        min="18"              <!-- idade mínima -->
+        max="120"             <!-- idade máxima -->
+        placeholder="Age"
+      >
+    </div>
+
+    <!-- Seleção: Form é funcional? (drop-down) -->
+    <div>
+      <label for="dropdown">Did you think this form is functional?</label>
+      <select id="dropdown" name="functional" required>
+        <option value="sure">Sure</option>
+        <option value="maybe">Maybe</option>
+        <option value="never">Never</option>
+      </select>
+    </div>
+
+    <!--
+      Grupo de radios (somente uma opção).
+      Fieldset + legend melhoram semântica/acessibilidade.
+    -->
+    <fieldset>
+      <legend>Would you send this form to your friend to fill out?</legend>
+
+      <div class="inline-option">
+        <input
+          type="radio"
+          id="recommend-yes"
+          name="recommend"      <!-- mesmo name => apenas 1 selecionado -->
+          value="surely"
+          checked
+        >
+        <label for="recommend-yes">Of course I already sent it</label>
+      </div>
+
+      <div class="inline-option">
+        <input
+          type="radio"
+          id="recommend-later"
+          name="recommend"
+          value="later"
+        >
+        <label for="recommend-later">Maybe later I will send</label>
+      </div>
+
+      <div class="inline-option">
+        <input
+          type="radio"
+          id="recommend-no"
+          name="recommend"
+          value="not-good"
+        >
+        <label for="recommend-no">No, unfortunately this form is not good</label>
+      </div>
+    </fieldset>
+
+    <!--
+      Grupo de checkboxes (múltiplas opções).
+      Use [] no name se quiser receber um array no backend (ex.: hobby[]).
+    -->
+    <fieldset>
+      <legend>What are your favorite hobbies?</legend>
+
+      <div class="inline-option">
+        <input type="checkbox" id="hobby-reading"  name="hobby" value="reading"  checked>
+        <label for="hobby-reading">Reading</label>
+      </div>
+
+      <div class="inline-option">
+        <input type="checkbox" id="hobby-traveling" name="hobby" value="traveling">
+        <label for="hobby-traveling">Traveling</label>
+      </div>
+
+      <div class="inline-option">
+        <input type="checkbox" id="hobby-cooking"  name="hobby" value="cooking">
+        <label for="hobby-cooking">Cooking</label>
+      </div>
+
+      <div class="inline-option">
+        <input type="checkbox" id="hobby-sports"   name="hobby" value="sports">
+        <label for="hobby-sports">Sports</label>
+      </div>
+
+      <div class="inline-option">
+        <input type="checkbox" id="hobby-music"    name="hobby" value="music">
+        <label for="hobby-music">Music</label>
+      </div>
+
+      <div class="inline-option">
+        <input type="checkbox" id="hobby-gaming"   name="hobby" value="gaming">
+        <label for="hobby-gaming">Gaming</label>
+      </div>
+
+      <div class="inline-option">
+        <input type="checkbox" id="hobby-others"   name="hobby" value="others">
+        <label for="hobby-others">Others</label>
+      </div>
+    </fieldset>
+
+    <!-- Comentários (texto livre) -->
+    <div>
+      <label for="comments">Any comments or suggestions to improve this form?</label>
+      <textarea
+        id="comments"
+        name="comments"
+        rows="6"
+        cols="40"
+        placeholder="Write your comments here..."
+      ></textarea>
+    </div>
+
+    <!-- Botão de envio do formulário -->
+    <div>
+      <input type="submit" id="submit" value="Submit">
+    </div>
+
+  </form>
+</body>
+</html>
