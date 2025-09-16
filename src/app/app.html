@@ -1,0 +1,142 @@
+<h1 id="title">First Survey Form</h1>
+
+<p id="description">
+  Fill out this form carefully and calmly, there is no need to rush
+</p>
+
+<form id="survey-form" method="post" action="#">
+
+  <div>
+    <label for="name" id="name-label">Name:</label>
+    <input
+      id="name"
+      name="name"
+      type="text"
+      required
+      placeholder="Enter your name"
+    />
+  </div>
+
+  <div>
+    <label for="email" id="email-label">Email:</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      required
+      placeholder="Enter your email"
+    />
+  </div>
+
+  <div>
+    <label for="number" id="number-label">Age:</label>
+    <input
+      id="number"
+      name="age"
+      type="number"
+      required
+      min="18"
+      max="120"
+      placeholder="Age"
+    />
+  </div>
+
+  <div>
+    <label for="dropdown">Did you think this form is functional?</label>
+    <select id="dropdown" name="functional" required>
+      <option value="sure">Sure</option>
+      <option value="maybe">Maybe</option>
+      <option value="never">Never</option>
+    </select>
+  </div>
+
+  <fieldset>
+    <legend>Would you send this form to your friend to fill out?</legend>
+
+    <div class="inline-option">
+      <input
+        type="radio"
+        id="recommend-yes"
+        name="recommend"
+        value="surely"
+        checked
+      />
+      <label for="recommend-yes">Of course I already sent it</label>
+    </div>
+
+    <div class="inline-option">
+      <input
+        type="radio"
+        id="recommend-later"
+        name="recommend"
+        value="later"
+      />
+      <label for="recommend-later">Maybe later I will send</label>
+    </div>
+
+    <div class="inline-option">
+      <input
+        type="radio"
+        id="recommend-no"
+        name="recommend"
+        value="not-good"
+      />
+      <label for="recommend-no">No, unfortunately this form is not good</label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>What are your favorite hobbies?</legend>
+
+    <div class="inline-option">
+      <input type="checkbox" id="hobby-reading"  name="hobby" value="reading"  checked />
+      <label for="hobby-reading">Reading</label>
+    </div>
+
+    <div class="inline-option">
+      <input type="checkbox" id="hobby-traveling" name="hobby" value="traveling" />
+      <label for="hobby-traveling">Traveling</label>
+    </div>
+
+    <div class="inline-option">
+      <input type="checkbox" id="hobby-cooking"  name="hobby" value="cooking" />
+      <label for="hobby-cooking">Cooking</label>
+    </div>
+
+    <div class="inline-option">
+      <input type="checkbox" id="hobby-sports"   name="hobby" value="sports" />
+      <label for="hobby-sports">Sports</label>
+    </div>
+
+    <div class="inline-option">
+      <input type="checkbox" id="hobby-music"   name="hobby" value="music" />
+      <label for="hobby-music">Music</label>
+    </div>
+
+    <div class="inline-option">
+      <input type="checkbox" id="hobby-gaming"   name="hobby" value="gaming" />
+      <label for="hobby-gaming">Gaming</label>
+    </div>
+
+    <div class="inline-option">
+      <input type="checkbox" id="hobby-others"   name="hobby" value="others" />
+      <label for="hobby-others">Others</label>
+    </div>
+  </fieldset>
+
+  <div>
+    <label for="comments">Any comments or suggestions to improve this form?</label>
+    <textarea
+      id="comments"
+      name="comments"
+      rows="6"
+      cols="40"
+      placeholder="Write your comments here..."
+    ></textarea>
+  </div>
+
+  <div>
+    <input type="submit" id="submit" value="Submit" />
+  </div>
+
+</form>
