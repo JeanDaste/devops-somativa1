@@ -1,29 +1,36 @@
-name: CI
+# .github/workflows/lint.yml
 
+name: Angular CI
+
+# Gatilhos: Roda em pull requests ou pushes para a branch main
 on:
   pull_request:
   push:
     branches: [ "main" ]
 
 jobs:
+  # Nome do job
   lint:
-    name: Lint / Super-Linter
+    name: Lint Angular Project
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      statuses: write
+
     steps:
+      # 1. Faz o checkout do código do seu repositório
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Super-Linter
-        uses: github/super-linter/slim@v6
-        env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_HTML: true
-          VALIDATE_CSS: true
-          VALIDATE_JAVASCRIPT_ES: true
-          VALIDATE_ALL_CODEBASE: true
+      # 2. Configura o ambiente Node.js. Use a versão que seu projeto utiliza.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x' # Ou a versão LTS mais recente
+          cache: 'npm' # Ativa o cache para as dependências do npm
+
+      # 3. Instala as dependências do projeto
+      # 'npm ci' é mais rápido e seguro para CI do que 'npm install'
+      - name: Install Dependencies
+        run: npm ci
+
+      # 4. Roda o comando de lint definido no package.json
+      - name: Run Linter
+        run: npm run lint
