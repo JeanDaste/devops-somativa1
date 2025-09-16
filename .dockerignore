@@ -1,8 +1,7 @@
+# .dockerignore
+
 .git
 .vscode
 node_modules
 npm-debug.log
 dist
-Dockerfile
-.dockerignore
-nginx.conf
