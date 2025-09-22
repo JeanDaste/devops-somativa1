@@ -1,5 +1,3 @@
-# .github/workflows/lint.yml
-
 name: Angular CI
 
 # Gatilhos: Roda em pull requests ou pushes para a branch main
@@ -9,41 +7,45 @@ on:
     branches: [ "main" ]
 
 jobs:
-  # Nome do job
   lint:
     name: Lint Angular Project
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Faz o checkout do código do seu repositório
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. Configura o ambiente Node.js. Use a versão que seu projeto utiliza.
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x' # Ou a versão LTS mais recente
-          cache: 'npm' # Ativa o cache para as dependências do npm
+          node-version: '20.x'
+          cache: 'npm'
 
-      # 3. Instala as dependências do projeto
-      # 'npm ci' é mais rápido e seguro para CI do que 'npm install'
       - name: Install Dependencies
         run: npm ci
 
-      # 4. Roda o comando de lint definido no package.json
       - name: Run Linter
         run: npm run lint
 
   discord:
-    needs: lint 
+    # Garante que este job só rodará DEPOIS que o job 'lint' terminar com sucesso
+    needs: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # 1. Faz o checkout do código com o histórico completo (MUITO IMPORTANTE!)
+      # A nova Action também precisa do histórico para listar os commits.
+      - name: Checkout with full history
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Run Discord Webhook
-        uses: johnnyhuy/actions-discord-git-webhook@main
+      # 2. Usa a nova Action 'Sniddl/discord-commits' para enviar a notificação
+      - name: Send Discord Commit Notification
+        uses: Sniddl/discord-commits@v1.6
         with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          # O nome do parâmetro aqui é 'webhook', não 'webhook_url'
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          
+          # Parâmetros extras que você sugeriu
+          template: "avatar-with-link"
+          include-extras: true
