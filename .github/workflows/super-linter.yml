@@ -34,10 +34,15 @@ jobs:
       # 4. Roda o comando de lint definido no package.json
       - name: Run Linter
         run: npm run lint
+
   discord:
+    needs: lint 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Run Discord Webhook
         uses: johnnyhuy/actions-discord-git-webhook@main
         with:
